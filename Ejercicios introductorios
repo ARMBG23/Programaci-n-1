@@ -1,0 +1,97 @@
+using System;
+
+namespace ConsoleAppExercises
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            // Ejercicio 1: Leer un número entero de dos dígitos y determinar a cuánto es igual la suma de sus dígitos.
+            Console.Write("Escriba un número de dos dígitos: ");
+            int num1 = int.Parse(Console.ReadLine());
+            int sumDigits = (num1 / 10) + (num1 % 10);
+            Console.WriteLine($"Sum of digits: {sumDigits}\n");
+
+            // Ejercicio 2:  Leer un número entero de dos dígitos y determinar si es primo y además si es negativo.
+            Console.Write("Escriba un número de dos dígitos: ");
+            int num2 = int.Parse(Console.ReadLine());
+            bool isNegative = num2 < 0;
+            bool isPrime = IsPrime(Math.Abs(num2));
+            Console.WriteLine($"Is negative: {isNegative}, Is prime: {isPrime}\n");
+
+            // Ejercicio 3:  Leer un número entero de dos dígitos y determinar si sus dos dígitos son primos.
+            Console.Write("Escriba un número de dos dígitos: ");
+            int num3 = int.Parse(Console.ReadLine());
+            int digit1 = num3 / 10;
+            int digit2 = num3 % 10;
+            bool bothDigitsPrime = IsPrime(digit1) && IsPrime(digit2);
+            Console.WriteLine($"Both digits are prime: {bothDigitsPrime}\n");
+
+            // Ejercicio 4: Leer dos números enteros de dos dígitos y determinar si la suma de los dos números origina un número par.
+            Console.Write("Escriba el primer número de dos dígitos: ");
+            int num4a = int.Parse(Console.ReadLine());
+            Console.Write("Escriba el segundo número de dos dígitos: ");
+            int num4b = int.Parse(Console.ReadLine());
+            bool isSumEven = ((num4a + num4b) % 2 == 0);
+            Console.WriteLine($"Sum is even: {isSumEven}\n");
+
+            // Ejercicio 5: Leer dos números enteros de dos dígitos y determinar si la suma de los dos números origina un número par.
+            Console.Write("Escriba un número de tres dígitos: ");
+            int num5 = int.Parse(Console.ReadLine());
+            int d1 = num5 / 100, d2 = (num5 / 10) % 10, d3 = num5 % 10;
+            int maxDigit = Math.Max(d1, Math.Max(d2, d3));
+            string position = maxDigit == d1 ? "first" : maxDigit == d2 ? "second" : "third";
+            Console.WriteLine($"The largest digit is in the {position} position\n");
+
+            // Ejercicio 6:Leer un número entero de tres dígitos y determinar si algún dígito es múltiplo de los otros.
+            Console.Write("Escriba un número de tres dígitos: ");
+            int num6 = int.Parse(Console.ReadLine());
+            int a6 = num6 / 100, b6 = (num6 / 10) % 10, c6 = num6 % 10;
+            bool hasMultiple = (a6 % b6 == 0 && a6 != b6) || (b6 % c6 == 0 && b6 != c6) || (c6 % a6 == 0 && c6 != a6);
+            Console.WriteLine($"A digit is a multiple of another: {hasMultiple}\n");
+
+            // Ejercicio 7:  Leer tres números enteros y determinar cuál es el mayor. Usar solamente dos variables.
+            Console.Write("Escriba tres números separados por espacios ");
+            string[] inputs7 = Console.ReadLine().Split();
+            int a7 = int.Parse(inputs7[0]), b7 = int.Parse(inputs7[1]), max7 = int.Parse(inputs7[2]);
+            max7 = Math.Max(max7, Math.Max(a7, b7));
+            Console.WriteLine($"The largest number is: {max7}\n");
+
+            // Ejercicio 8:  Leer un número entero de cinco dígitos y determinar si es un número Capicúa. 
+            Console.Write("Escriba un número de cinco dígitos: ");
+            string num8 = Console.ReadLine();
+            bool isPalindrome = num8 == new string(num8.Reverse().ToArray());
+            Console.WriteLine($"Is palindrome: {isPalindrome}\n");
+
+            // Ejercicio 9:  Leer un número entero de cuatro dígitos y determinar si el segundo dígito es igual al penúltimo.
+            Console.Write("Escriba un número de cuatro dígitos: ");
+            string num9 = Console.ReadLine();
+            bool secondEqualsPenultimate = num9[1] == num9[2];
+            Console.WriteLine($"Second digit equals penultimate: {secondEqualsPenultimate}\n");
+
+            // Ejercicio 10:  Leer dos números enteros y si la diferencia entre los dos es menor o igual 
+            //a 10 entonces mostrar en pantalla todos los enteros comprendidos entre el menor y el mayor de los números leídos.
+            Console.Write("Escriba dos números enteros: ");
+            string[] inputs10 = Console.ReadLine().Split();
+            int n10a = int.Parse(inputs10[0]), n10b = int.Parse(inputs10[1]);
+            if (Math.Abs(n10a - n10b) <= 10)
+            {
+                int min = Math.Min(n10a, n10b), max = Math.Max(n10a, n10b);
+                for (int i = min; i <= max; i++)
+                {
+                    Console.Write(i + " ");
+                }
+            }
+        }
+
+        static bool IsPrime(int num)
+        {
+            if (num <= 1) return false;
+            for (int i = 2; i <= Math.Sqrt(num); i++)
+            {
+                if (num % i == 0) return false;
+            }
+            return true;
+        }
+    }
+}
